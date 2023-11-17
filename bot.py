@@ -28,7 +28,7 @@ def start(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     response = model.getResponse(message.text)
-    bot.send_message(message.chat.id, response)
+    bot.send_message(message.chat.id, response, parse_mode='Markdown')
 
 def main():
     """Runs the Telegram Bot"""

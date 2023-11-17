@@ -57,20 +57,20 @@ def getResponse(question: str) -> str:
 
     # Code below will enable tracing so we can take a deeper look into the chain
     os.environ["LANGCHAIN_TRACING_V2"] = "true"
-    os.environ["LANGCHAIN_ENDPOINT"] = "https://api.langchain.plus"
+    os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
     os.environ["LANGCHAIN_PROJECT"] = "Chatbot"
+
 
     # Define parameters for retrival
     retriever=vectordb.as_retriever(search_type="similarity_score_threshold", search_kwargs={"score_threshold": .5, "k": 5})
 
     # Define llm model
 
-    llm_name = "gpt-3.5-turbo-16k"
+    llm_name = "gpt-3.5-turbo-1106"
     llm = ChatOpenAI(model_name=llm_name, temperature=0)
     # Define template prompt
-    template = """You are a friendly chatbot that helps sad university students cope with their immense stress. 
-    Use the following pieces of context to answer the question at the end.
-    {context}
+    template = """Based on the context given, provide a summary of the problem. Make sure you are as descriptive as possible. Make use of the code and classes given.
+    Context: {context}
     Question: {question}
     Helpful Answer:"""
 
